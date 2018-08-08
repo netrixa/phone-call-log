@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="common-header">
+
+<title>Call Log</title>
+
+
+<!-- Bootstrap CSS -->
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+<!-- bootstrap theme -->
+<link th:href="@{/css/bootstrap-theme.css}" rel="stylesheet" media="screen"/>
+<!--external css-->
+<!-- font icon -->
+<link th:href="@{/css/elegant-icons-style.css}" rel="stylesheet" />
+<link th:href="@{/css/font-awesome.css}" rel="stylesheet" media="screen" />
+<!-- Custom styles -->
+<link th:href="@{/css/style.css}" rel="stylesheet" media="screen"/>
+<link th:href="@{/css/style-responsive.css}" rel="stylesheet" media="screen" />
+<link th:href="@{/assets/datepicker/datepicker3.css}" rel="stylesheet" media="screen" />
+<link th:href="@{/css/dropzone.css}" rel="stylesheet" media="screen" />
+
+
+  <!-- DataTables -->
+    <link rel="stylesheet" th:href="@{/assets/datatables/dataTables.bootstrap.css}"/>
+<!--     <link rel="stylesheet" th:href="@{/assets/datatables/extensions/Buttons/css/buttons.dataTables.min.css}"/> -->
+
+<link th:href="@{/css/sweetalert.css}" rel="stylesheet" media="screen" />
+    <link type="text/css" th:href="@{/css/select2.css}" rel="stylesheet" media="screen"/>
+
+
+
+
+
+</head>
+<div th:fragment="before-body-scripts">
+	<script th:src="@{/js/jquery.js}"></script>
+<!-- 	<script th:src="@{/webjars/bootstrap/3.1.0/js/bootstrap.min.js}"></script> -->
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<script th:src="@{/js/jquery.scrollTo.min.js}"></script>
+	<script th:src="@{/js/jquery.nicescroll.js}"></script>
+	<script th:src="@{/js/scripts.js}"></script>
+</div>
+</html>

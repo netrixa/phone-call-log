@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/header2 :: common-header" />
+
+
+
+
+
+<body>
+	<!-- container section start -->
+	<section id="container" class="">
+
+		<div th:replace="common/navbar :: common-navbar" />
+
+		<!--main content start-->
+		<section id="main-content">
+			<section class="wrapper">
+				<div class="row">
+					<div class="col-lg-12">
+						<h3 class="page-header">
+							<i class="fa fa fa-bars"></i> <span
+								th:text="#{page.title.uploadlog}"></span>
+						</h3>
+						<ol class="breadcrumb">
+
+						</ol>
+					</div>
+				</div>
+
+
+
+				<!-- page start-->
+
+				<div class="row">
+					<div class="col-lg-8">
+						<section class="panel">
+							<header class="panel-heading"></header>
+							<div class="panel-body">
+								<div class="form">
+									<form class="form-validate form-horizontal" id="feedback_form"
+										method="post">
+										<div class="form-group ">
+											<label for="cname" class="control-label col-lg-2">Title
+												<span class="required">*</span>
+											</label>
+											<div class="col-lg-10">
+												<input class="form-control" name="title" id="title"
+													minlength="5" type="text" required="true" />
+											</div>
+										</div>
+										
+										
+										<div class="form-group">
+											<label for="cname" class="control-label col-lg-2">&nbsp;
+											</label>
+											<div class="col-lg-8 col-lg-offset-1 dropzone m-bot15" id="logupload"></div>
+										</div>
+									
+									</form>
+								</div>
+
+							</div>
+						</section>
+					</div>
+				</div>
+
+
+				<!-- page end-->
+			</section>
+		</section>
+		<!--main content end-->
+
+
+
+
+
+		<!--         <div th:replace="common/footer :: common-footer" /> -->
+
+
+
+
+	</section>
+
+	<div th:replace="common/header2 :: before-body-scripts" />
+	<script th:src="@{/assets/datepicker/bootstrap-datepicker.js}"></script>
+	<script th:src="@{/js/dropzone.js}"></script>
+	<script th:src="@{/js/notify.js}"></script>
+
+
+
+	<script>
+		$(document).ready(function() {
+			$('#period').datepicker({
+				format : 'M-yyyy',
+				todayBtn:true,
+				todayHighlight:true,
+				toggleActive:true,
+				minViewMode:"months"
+			});
+
+			Dropzone.autoDiscover = false;
+			$("div#logupload").dropzone({
+				paramName : "uploadedfile",
+				dictDefaultMessage : "Drop files to upload (or click)",
+				url : "/file/upload",
+				method : "post",
+				maxFilesize:10,
+				maxFiles : 1,
+				uploadMultiple : true,
+				//acceptedFiles : "application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+				params : function(e, b) {
+					return {
+						title : $("#title").val(),
+						period : $("#period").val(),
+						network : $("#network").val()
+					}
+				},
+				init : function() {
+					this.on("addedfile", function(file) {
+						
+						if (!validate()) {
+							this.removeFile(file)
+							return false;
+						}
+					});
+				},
+				error : function(file) {
+
+				},
+				success : function(args, response) {
+					displayNotification(response.message)
+				},
+				complete : function(file) {
+					//alert(file)
+				}
+
+			});
+
+		})
+
+		function validate() {
+			if ($("#title").val() == "") {
+				displayNotification("Title is required")
+				return false;
+			}
+			
+			return true;
+		}
+
+		function displayNotification(message) {
+			option = {
+				// whether to hide the notification on click
+				clickToHide : true,
+				// whether to auto-hide the notification
+				autoHide : true,
+				// if autoHide, hide after milliseconds
+				autoHideDelay : 5000,
+				// show the arrow pointing at the element
+				arrowShow : true,
+				// arrow size in pixels
+				arrowSize : 5,
+				// position defines the notification position though uses the defaults below
+				position : 'top center',
+				// default positions
+				//elementPosition : 'bottom left',
+				globalPosition : 'bottom center',
+				// default style
+				style : 'bootstrap',
+				// default class (string or [string])
+				className : 'success',
+				// show animation
+				showAnimation : 'slideDown',
+				// show animation duration
+				showDuration : 400,
+				// hide animation
+				hideAnimation : 'slideUp',
+				// hide animation duration
+				hideDuration : 200,
+				// padding between element and notification
+				gap : 2
+			}
+			$('.dropzone').notify(message, option);
+		}
+	</script>
+
+
+</body>
+
+
+
+
+
+
+</html>

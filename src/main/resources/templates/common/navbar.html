@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+	<div th:fragment="common-navbar">
+
+		<!--header start-->
+
+		<header class="header dark-bg">
+			<div class="toggle-nav">
+				<div class="icon-reorder tooltips"
+					data-original-title="Toggle Navigation" data-placement="bottom">
+					<i class="icon_menu"></i>
+				</div>
+			</div>
+
+			<!--logo start-->
+			<a href="index.html" class="logo">Call Logs</a>
+			<!--logo end-->
+
+			<div class="nav search-row" id="top_menu">
+				<!--  search form start -->
+				<ul class="nav top-menu">
+					<li>
+						<form class="navbar-form">
+							<input class="form-control" placeholder="Search" type="text" />
+						</form>
+					</li>
+				</ul>
+				<!--  search form end -->
+			</div>
+
+			<div class="top-nav notification-row">
+				<!-- notificatoin dropdown start-->
+				<ul class="nav pull-right top-menu">
+
+
+					<!-- user login dropdown start-->
+					<li class="dropdown"><a data-toggle="dropdown"
+						class="dropdown-toggle" href="#"> <span class="fa fa-user"></span>
+
+							<span sec:authorize="isAuthenticated()"> <span
+								class="username" sec:authentication="name"></span> <b
+								class="caret"></b>
+						</span>
+					</a>
+						<ul class="dropdown-menu extended logout">
+							<div class="log-arrow-up"></div>
+
+
+
+
+							<li sec:authorize="isAuthenticated()"><a href="/logout"><i
+									class="icon_key_alt"></i> Log Out</a></li>
+
+
+
+						</ul></li>
+					<!-- user login dropdown end -->
+
+
+				</ul>
+				<!-- notificatoin dropdown end-->
+			</div>
+		</header>
+		<!--header end-->
+		<!--sidebar start-->
+		<aside>
+			<div id="sidebar" class="nav-collapse ">
+				<!-- sidebar menu start-->
+				<ul class="sidebar-menu">
+					<li class=""><a href="/account/dashboard" class=""> <i
+							class="icon_document_alt"></i> <span>Dashboard</span> <span
+							class="menu-arrow arrow_carrot-right"></span>
+					</a></li>
+					<li class="sub-menu"><a href="javascript:;" class=""> <i
+							class="icon_document_alt"></i> <span>Logs</span> <span
+							class="menu-arrow arrow_carrot-right"></span>
+					</a>
+						<ul class="sub">
+
+							<div sec:authorize="hasRole('ROLE_DH')">
+
+								<li><a class="" href="/file/upload">Upload</a></li>
+							</div>
+							<div sec:authorize="hasRole('ROLE_CSO') || hasRole('ROLE_DPO')">
+
+								<li><a class="" href="/file/uploaded/files">View</a></li>
+							</div>
+						</ul>
+						</li>
+
+
+
+
+				</ul>
+				<!-- sidebar menu end-->
+			</div>
+		</aside>
+		<!--sidebar end-->
+	</div>
+
+
+</body>
+</html>

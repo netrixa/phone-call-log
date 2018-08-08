@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/header :: common-header" />
+
+
+<body>
+
+    <!-- Imports the common navbar -->
+<head th:replace="common/header2 :: common-header" />
+
+
+    <div class="container">
+
+        <div class="jumbotron text-center">
+
+            <h1>Something Happened!</h1>
+
+   
+            <p th:if="${url}">
+                <b>Page:</b> <span th:text="${url}">Page URL</span>
+            </p>
+
+            <p th:if="${timestamp}" id='created'>
+                <b>Occurred:</b> <span th:text="${timestamp}">Timestamp</span>
+            </p>
+
+            <p>System encountered an error or you are not authorized to view that page!</p>
+
+
+        </div>
+
+    </div>
+
+
+    <div th:replace="common/header :: before-body-scripts" />
+
+</body>
+</html>
